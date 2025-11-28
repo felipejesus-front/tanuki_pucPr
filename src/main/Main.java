@@ -42,6 +42,7 @@ public class Main {
         return financiamentoList;
     }
 
+    //função para mostrar total que recebe o campo e o texto com o nome do campo.
     public static void mostrarTotal(List<Financiamento> lista, String nomeCampo, java.util.function.ToDoubleFunction<Financiamento> extractor) {
         double total = lista.stream().mapToDouble(extractor).sum();
         System.out.println("Valor total de " + nomeCampo + ": R$ " + String.format("%,.2f", total));
