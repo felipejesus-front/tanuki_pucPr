@@ -24,6 +24,11 @@ public class Financiamento {
         return (taxaJurosAnual/12);
     }
 
+    int prazoFinanciamentoEmMeses(){
+        return getPrazoFinanciamento()*12;
+    }
+
+
     public void mostrarDadosFinanciamento() {
         System.out.println("Valor do Imóvel: R$ " + String.format("%,.2f",valorImovel));
         System.out.println("Valor da Parcela: R$ " + String.format("%,.2f",calcularPagamentoMensal()));
