@@ -17,7 +17,11 @@ public class Financiamento {
 
 
     public double calcularPagamentoMensal(){
-        return (this.valorImovel / (this.prazoFinanciamento * 12)) * (1 + (this.taxaJurosAnual/12));
+        return (getValorImovel() / (getPrazoFinanciamento() * 12)) * (1 + (taxaJurosMensal(getTaxaJurosAnual())));
+    }
+
+    public double taxaJurosMensal(double taxaJurosAnual ){
+        return (taxaJurosAnual/12);
     }
 
     public void mostrarDadosFinanciamento() {
@@ -27,7 +31,7 @@ public class Financiamento {
     }
 
     public double calculoTotalPagamento(){
-        return this.calcularPagamentoMensal() * this.prazoFinanciamento * 12;
+        return this.calcularPagamentoMensal() * getPrazoFinanciamento() * 12;
     }
 
 
