@@ -28,12 +28,11 @@ public class Main {
 
     }
 
-    //Função para criar financiamentos diferentes com opção de quantidade de financiamentos.
-    //por enquanto vai ser hardCoded e não por terminal. mas pedir a quantidade pro cliente pode ser util
-    public static List<? extends Financiamento> criarFinanciamentos(InterfaceUsuario interfaceUsuario, int quantidade, Class<? extends Financiamento> tipoFinanciamento) {
+    //Fiz uma mudança nesse metodo pra receber também classes que extendem financiamento. Não sabia q dava pra fazer isso, obrigado pelo incentivo!
+    public static List<? extends Financiamento> criarFinanciamentos(InterfaceUsuario interfaceUsuario, int quantidade, String NomeFinanciamento, Class<? extends Financiamento> tipoFinanciamento) {
         List<Financiamento> financiamentoList = new ArrayList<>();
         for (int i = 0; i < quantidade; i++) {
-            System.out.println("Financiamento #" + (i + 1));
+            System.out.println("Financiamento  de "+ NomeFinanciamento + " " + (i + 1));
             double valorImovel = interfaceUsuario.pedirValorImovel();
             int prazoFinanciamentoEmAnos = interfaceUsuario.pedirPrazoFinanciamento();
             double taxaJuros = interfaceUsuario.pedirTaxaDeJuros();
@@ -44,7 +43,7 @@ public class Main {
                         .newInstance(valorImovel, prazoFinanciamentoEmAnos, taxaJuros);
                 financiamentoList.add(financiamento);
             } catch (Exception e) {
-                throw new RuntimeException("Erro ao criar financiamento", e);
+                throw new RuntimeException("Erro ao criar financiamento de " + NomeFinanciamento, e);
             }
         }
         return financiamentoList;
