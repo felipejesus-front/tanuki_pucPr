@@ -1,7 +1,9 @@
 package main;
 
+import modelo.Apartamento;
 import modelo.Casa;
 import modelo.Financiamento;
+import modelo.Terreno;
 import util.InterfaceUsuario;
 
 import java.util.ArrayList;
@@ -15,16 +17,18 @@ public class Main {
     public static void main(String[] args) {
 
         InterfaceUsuario interfaceUsuario = new InterfaceUsuario();
-        List<? extends Financiamento> financiamentoList = criarFinanciamentos(interfaceUsuario, 2, Financiamento.class);
-        List<? extends Financiamento> financiamentoCasa = criarFinanciamentos(interfaceUsuario, 2, Casa.class);
-        for (Financiamento financiamento : financiamentoList) {
-            financiamento.mostrarDadosFinanciamento();
-        }
 
-        interfaceUsuario.mostrarSeparador();
+        //crio as listas de financiamentos de qualquer um dos tipos de financiamentos
+        List<? extends Financiamento> financiamentoCasa = criarFinanciamentos(interfaceUsuario, 2, "Casa", Casa.class);
+        mostrarResumoFinanciamentos(financiamentoCasa, interfaceUsuario);
 
-        mostrarTotal(financiamentoList, "imóveis", Financiamento::getValorImovel);
-        mostrarTotal(financiamentoList, "financiamentos", Financiamento::calculoTotalPagamento);
+
+        List<? extends Financiamento> financiamentoApartamento = criarFinanciamentos(interfaceUsuario, 2,"Apartamento", Apartamento.class);
+        mostrarResumoFinanciamentos(financiamentoApartamento, interfaceUsuario);
+
+
+        List<? extends Financiamento> financiamentoTerreno = criarFinanciamentos(interfaceUsuario, 2, "Terreno", Terreno.class);
+        mostrarResumoFinanciamentos(financiamentoTerreno, interfaceUsuario);
 
     }
 
