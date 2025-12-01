@@ -66,7 +66,11 @@ public class InterfaceUsuario {
         }
     }
 
-    public void mostrarSeparador() {
+    public void criarEspaço() {
         System.out.println();
+    }
+
+        public void mostrarSeparador() {
+        System.out.println("================================");
     }
 }
