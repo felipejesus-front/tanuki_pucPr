@@ -25,7 +25,8 @@ public class Financiamento {
     }
 
     public void mostrarDadosFinanciamento() {
-        System.out.println("Valor do Imóvel: R$ " + valorImovel);
+        System.out.println("Valor do Imóvel: R$ " + String.format("%,.2f",valorImovel));
+        System.out.println("Valor da Parcela: R$ " + String.format("%,.2f",calcularPagamentoMensal()));
         System.out.println("Valor Total do Financiamento: R$ " + String.format("%,.2f", calculoTotalPagamento()));
 
     }
