@@ -55,7 +55,7 @@ public class InterfaceUsuario {
             try {
                 System.out.println("Digite o valor da taxa de juros: ");
                 financiamento.setTaxaJurosAnual(scanner.nextDouble());
-                return financiamento.getValorImovel();
+                return financiamento.getTaxaJurosAnual();
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             } catch (Exception e) {
