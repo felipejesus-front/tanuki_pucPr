@@ -56,4 +56,22 @@ public class Main {
         System.out.println("Valor total de " + nomeCampo + ": R$ " + String.format("%,.2f", total));
     }
 
+    //Se der certo, esse metodo vai mostrar qualquer tipo de financiamento q eu quizer, seja casa, Apartamento ou TErreno, desde que extenda Financiamento.
+    public static void mostrarResumoFinanciamentos(
+            List<? extends Financiamento> lista,
+            InterfaceUsuario interfaceUsuario
+    ) {
+
+        interfaceUsuario.mostrarSeparador();
+        for (Financiamento financiamento : lista) {
+            financiamento.mostrarDadosFinanciamento();
+        }
+        interfaceUsuario.criarEspaço();
+        mostrarTotal(lista, "imóveis", Financiamento::getValorImovel);
+        mostrarTotal(lista, "financiamentos", Financiamento::calculoTotalPagamento);
+
+        interfaceUsuario.mostrarSeparador();
+        interfaceUsuario.criarEspaço();
+    }
+
 }
