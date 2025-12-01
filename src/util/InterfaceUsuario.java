@@ -66,7 +66,7 @@ public class InterfaceUsuario {
         }
     }
 
-    public void criarEspaço() {
+    public void criarEspaco() {
         System.out.println();
     }
 

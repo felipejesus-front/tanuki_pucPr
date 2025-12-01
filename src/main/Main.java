@@ -8,7 +8,6 @@ import util.InterfaceUsuario;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 
 
@@ -69,12 +68,12 @@ public class Main {
         for (Financiamento financiamento : lista) {
             financiamento.mostrarDadosFinanciamento();
         }
-        interfaceUsuario.criarEspaço();
+        interfaceUsuario.criarEspaco();
         mostrarTotal(lista, "imóveis", Financiamento::getValorImovel);
         mostrarTotal(lista, "financiamentos", Financiamento::calculoTotalPagamento);
 
         interfaceUsuario.mostrarSeparador();
-        interfaceUsuario.criarEspaço();
+        interfaceUsuario.criarEspaco();
     }
 
 }
