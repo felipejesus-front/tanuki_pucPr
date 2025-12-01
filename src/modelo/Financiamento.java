@@ -15,7 +15,6 @@ public class Financiamento {
 
     }
 
-
     public double calcularPagamentoMensal(){
         return (getValorImovel() / (getPrazoFinanciamento() * 12)) * (1 + (taxaJurosMensal(getTaxaJurosAnual())));
     }
