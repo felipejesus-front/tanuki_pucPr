@@ -7,9 +7,8 @@ import java.util.Scanner;
 public class InterfaceUsuario {
 
     Scanner scanner = new Scanner(System.in);
-    Financiamento financiamento = new Financiamento(0, 0, 0);
 
-    public double pedirValorImovel(){
+    public double pedirValorImovel(Financiamento financiamento){
         while (true){
             try{
                 System.out.println("Digite o valor do imóvel: ");
@@ -23,13 +22,10 @@ public class InterfaceUsuario {
                 System.out.println("Entrada inválida. Tente novamente.");
                 scanner.nextLine(); // limpa o buffer
             }
-
-
         }
     }
 
-    public int pedirPrazoFinanciamento(){
-
+    public int pedirPrazoFinanciamento(Financiamento financiamento){
         while (true){
             try{
                 System.out.println("Digite o prazo do financiamento em anos: ");
@@ -43,14 +39,10 @@ public class InterfaceUsuario {
                 System.out.println("Entrada inválida. Tente novamente.");
                 scanner.nextLine(); // limpa o buffer
             }
-
-
         }
-
-
     }
 
-    public double pedirTaxaDeJuros(){
+    public double pedirTaxaDeJuros(Financiamento financiamento){
         while (true) {
             try {
                 System.out.println("Digite o valor da taxa de juros: ");
@@ -62,7 +54,6 @@ public class InterfaceUsuario {
                 System.out.println("Entrada inválida. Tente novamente.");
                 scanner.nextLine(); // limpa o buffer
             }
-
         }
     }
 
