@@ -58,19 +58,25 @@ public class Main {
         System.out.println("Valor total de " + nomeCampo + ": R$ " + String.format("%,.2f", total));
     }
 
-    //Se der certo, esse metodo vai mostrar qualquer tipo de financiamento q eu quizer, seja casa, Apartamento ou TErreno, desde que extenda Financiamento.
+    //Se der certo, esse metodo vai mostrar qualquer tipo de financiamento q eu quizer, seja casa, Apartamento ou Terreno, desde que extenda Financiamento.
     public static void mostrarResumoFinanciamentos(
             List<? extends Financiamento> lista,
             InterfaceUsuario interfaceUsuario
+            InterfaceUsuario interfaceUsuario,
     ) {
 
+        System.out.println("\n=== Resumo dos Financiamentos de " + nomeFinanciamento + " ===");
         interfaceUsuario.mostrarSeparador();
+
         for (Financiamento financiamento : lista) {
             financiamento.mostrarDadosFinanciamento();
+            financiamento.mostrarDadosFinanciamento(nomeFinanciamento, count);
         }
+
         interfaceUsuario.criarEspaco();
         mostrarTotal(lista, "imóveis", Financiamento::getValorImovel);
         mostrarTotal(lista, "financiamentos", Financiamento::calculoTotalPagamento);
+        mostrarTotal(lista, "imóveis de " + nomeFinanciamento, Financiamento::getValorImovel);
 
         interfaceUsuario.mostrarSeparador();
         interfaceUsuario.criarEspaco();
