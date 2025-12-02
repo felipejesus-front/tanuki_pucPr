@@ -19,36 +19,37 @@ public class Main {
 
         //crio as listas de financiamentos de qualquer um dos tipos de financiamentos
         List<? extends Financiamento> financiamentoCasa = criarFinanciamentos(interfaceUsuario, 2, "Casa", Casa.class);
-        mostrarResumoFinanciamentos(financiamentoCasa, interfaceUsuario);
-
 
         List<? extends Financiamento> financiamentoApartamento = criarFinanciamentos(interfaceUsuario, 2,"Apartamento", Apartamento.class);
-        mostrarResumoFinanciamentos(financiamentoApartamento, interfaceUsuario);
-
 
         List<? extends Financiamento> financiamentoTerreno = criarFinanciamentos(interfaceUsuario, 2, "Terreno", Terreno.class);
-        mostrarResumoFinanciamentos(financiamentoTerreno, interfaceUsuario);
 
     }
 
     //Fiz uma mudança nesse metodo pra receber também classes que extendem financiamento. Não sabia q dava pra fazer isso, obrigado pelo incentivo!
-    public static List<? extends Financiamento> criarFinanciamentos(InterfaceUsuario interfaceUsuario, int quantidade, String NomeFinanciamento, Class<? extends Financiamento> tipoFinanciamento) {
+    public static List<? extends Financiamento> criarFinanciamentos(InterfaceUsuario interfaceUsuario, int quantidade, String nomeFinanciamento, Class<? extends Financiamento> tipoFinanciamento) {
         List<Financiamento> financiamentoList = new ArrayList<>();
         for (int i = 0; i < quantidade; i++) {
-            System.out.println("Financiamento  de "+ NomeFinanciamento + " " + (i + 1));
-            double valorImovel = interfaceUsuario.pedirValorImovel();
-            int prazoFinanciamentoEmAnos = interfaceUsuario.pedirPrazoFinanciamento();
-            double taxaJuros = interfaceUsuario.pedirTaxaDeJuros();
+            System.out.println("Financiamento  de "+ nomeFinanciamento + " " + (i + 1));
 
             try {
+                Financiamento financiamentoTemp = tipoFinanciamento.getConstructor(double.class, int.class, double.class).newInstance(0.0, 1, 0.0);
+
+                double valorImovel = interfaceUsuario.pedirValorImovel(financiamentoTemp);
+                int prazoFinanciamentoEmAnos = interfaceUsuario.pedirPrazoFinanciamento(financiamentoTemp);
+                double taxaJuros = interfaceUsuario.pedirTaxaDeJuros(financiamentoTemp);
+
+
                 Financiamento financiamento = tipoFinanciamento
                         .getConstructor(double.class, int.class, double.class)
                         .newInstance(valorImovel, prazoFinanciamentoEmAnos, taxaJuros);
                 financiamentoList.add(financiamento);
             } catch (Exception e) {
-                throw new RuntimeException("Erro ao criar financiamento de " + NomeFinanciamento, e);
+                throw new RuntimeException("Erro ao criar financiamento de " + nomeFinanciamento, e);
             }
         }
+
+        mostrarResumoFinanciamentos(financiamentoList, interfaceUsuario, nomeFinanciamento);
         return financiamentoList;
     }
 
