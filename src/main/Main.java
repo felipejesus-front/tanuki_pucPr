@@ -1,6 +1,7 @@
 package main;
 
 import modelo.Apartamento;
+import modelo.AumentoMaiorDoQueJurosException;
 import modelo.Casa;
 import modelo.Financiamento;
 import modelo.Terreno;
@@ -71,6 +72,11 @@ public class Main {
 
                 financiamentoList.add(financiamento);
 
+            } catch (AumentoMaiorDoQueJurosException e) {
+                System.err.println("\n*** ERRO AO CRIAR FINANCIAMENTO DE CASA ***");
+                System.err.println(e.getMessage());
+                System.err.println("Por favor, tente novamente com valores diferentes (maior prazo ou maior taxa de juros).\n");
+                i--; // Decrementa para repetir esta iteração
             } catch (Exception e) {
                 throw new RuntimeException("Erro ao criar financiamento de " + nomeFinanciamento, e);
             }

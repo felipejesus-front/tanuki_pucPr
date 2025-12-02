@@ -1,18 +1,35 @@
 package modelo;
 
-public class Casa  extends Financiamento{
+public class Casa extends Financiamento {
 
     private double tamanhoareaConstrucao;
     private double tamanhoTerreno;
 
-    public Casa(double valorImovel, int prazoFinanciamento, double taxaJurosAnual, double tamanhoareaConstrucao, double tamanhoTerreno) {
+    public Casa(double valorImovel, int prazoFinanciamento, double taxaJurosAnual, double tamanhoareaConstrucao, double tamanhoTerreno) throws AumentoMaiorDoQueJurosException {
         super(valorImovel, prazoFinanciamento, taxaJurosAnual);
         this.tamanhoareaConstrucao = tamanhoareaConstrucao;
         this.tamanhoTerreno = tamanhoTerreno;
+
+        // Valida se o acréscimo é válido
+        validarAcrescimo();
     }
 
-    public double calcularPagamentoMensal(){
-        return super.calcularPagamentoMensal() + 80 ;
+    /**
+     * Valida se o acréscimo de R$ 80 não é maior que a metade dos juros da mensalidade
+     */
+    private void validarAcrescimo() throws AumentoMaiorDoQueJurosException {
+        double pagamentoBase = super.calcularPagamentoMensal();
+        double principal = getValorImovel() / (getPrazoFinanciamento() * 12);
+        double juros = pagamentoBase - principal;
+        double acrescimo = 80.0;
+
+        if (acrescimo > (juros / 2)) {
+            throw new AumentoMaiorDoQueJurosException(acrescimo, juros);
+        }
+    }
+
+    public double calcularPagamentoMensal() {
+        return super.calcularPagamentoMensal() + 80;
     }
 
     @Override
@@ -47,3 +64,4 @@ public class Casa  extends Financiamento{
         this.tamanhoTerreno = tamanhoTerreno;
     }
 }
+

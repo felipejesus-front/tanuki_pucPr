@@ -7,29 +7,30 @@ public class InterfaceUsuario {
     Scanner scanner = new Scanner(System.in);
 
     // Métodos genéricos que retornam valores validados
-    public double pedirValorImovel(){
-        while (true){
-            try{
+    public double pedirValorImovel() {
+        while (true) {
+            try {
                 System.out.println("Digite o valor do imóvel: ");
                 double valor = scanner.nextDouble();
                 if (valor <= 0) {
                     throw new IllegalArgumentException("O valor do imóvel deve ser maior que zero.");
                 }
                 return valor;
-            }
-            catch (IllegalArgumentException e ) {
+            } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 System.out.println("Entrada inválida. Tente novamente.");
                 scanner.nextLine(); // limpa o buffer
+            } finally {
+                // O finally é executado independente de ocorrer exceção ou não
+                System.out.flush(); // garante que a saída seja exibida
             }
         }
     }
 
-    public int pedirPrazoFinanciamento(){
-        while (true){
-            try{
+    public int pedirPrazoFinanciamento() {
+        while (true) {
+            try {
                 System.out.println("Digite o prazo do financiamento em anos: ");
                 int prazo = scanner.nextInt();
                 if (prazo <= 0) {
@@ -39,18 +40,18 @@ public class InterfaceUsuario {
                     throw new IllegalArgumentException("O prazo informado é irreal. Informe um prazo menor que 50 anos.");
                 }
                 return prazo;
-            }
-            catch (IllegalArgumentException e ) {
+            } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 System.out.println("Entrada inválida. Tente novamente.");
                 scanner.nextLine(); // limpa o buffer
+            } finally {
+                System.out.flush();
             }
         }
     }
 
-    public double pedirTaxaDeJuros(){
+    public double pedirTaxaDeJuros() {
         while (true) {
             try {
                 System.out.println("Digite o valor da taxa de juros: ");
@@ -67,6 +68,8 @@ public class InterfaceUsuario {
             } catch (Exception e) {
                 System.out.println("Entrada inválida. Tente novamente.");
                 scanner.nextLine(); // limpa o buffer
+            } finally {
+                System.out.flush();
             }
         }
     }
@@ -86,6 +89,8 @@ public class InterfaceUsuario {
             } catch (Exception e) {
                 System.out.println("Entrada inválida. Tente novamente.");
                 scanner.nextLine();
+            } finally {
+                System.out.flush();
             }
         }
     }
@@ -107,6 +112,8 @@ public class InterfaceUsuario {
             } catch (Exception e) {
                 System.out.println("Entrada inválida. Tente novamente.");
                 scanner.nextLine();
+            } finally {
+                System.out.flush();
             }
         }
     }
@@ -126,6 +133,8 @@ public class InterfaceUsuario {
             } catch (Exception e) {
                 System.out.println("Entrada inválida. Tente novamente.");
                 scanner.nextLine();
+            } finally {
+                System.out.flush();
             }
         }
     }
@@ -144,6 +153,8 @@ public class InterfaceUsuario {
             } catch (Exception e) {
                 System.out.println("Entrada inválida. Tente novamente.");
                 scanner.nextLine();
+            } finally {
+                System.out.flush();
             }
         }
     }
@@ -167,6 +178,8 @@ public class InterfaceUsuario {
                 System.out.println(e.getMessage());
             } catch (Exception e) {
                 System.out.println("Entrada inválida. Tente novamente.");
+            } finally {
+                System.out.flush();
             }
         }
     }
@@ -179,3 +192,4 @@ public class InterfaceUsuario {
         System.out.println("================================");
     }
 }
+
