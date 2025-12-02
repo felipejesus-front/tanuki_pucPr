@@ -61,22 +61,22 @@ public class Main {
     //Se der certo, esse metodo vai mostrar qualquer tipo de financiamento q eu quizer, seja casa, Apartamento ou Terreno, desde que extenda Financiamento.
     public static void mostrarResumoFinanciamentos(
             List<? extends Financiamento> lista,
-            InterfaceUsuario interfaceUsuario
             InterfaceUsuario interfaceUsuario,
+            String nomeFinanciamento
     ) {
 
         System.out.println("\n=== Resumo dos Financiamentos de " + nomeFinanciamento + " ===");
         interfaceUsuario.mostrarSeparador();
 
+        int count = 1;
         for (Financiamento financiamento : lista) {
-            financiamento.mostrarDadosFinanciamento();
             financiamento.mostrarDadosFinanciamento(nomeFinanciamento, count);
+            count ++;
         }
 
         interfaceUsuario.criarEspaco();
-        mostrarTotal(lista, "imóveis", Financiamento::getValorImovel);
-        mostrarTotal(lista, "financiamentos", Financiamento::calculoTotalPagamento);
         mostrarTotal(lista, "imóveis de " + nomeFinanciamento, Financiamento::getValorImovel);
+        mostrarTotal(lista, "financiamentos de " + nomeFinanciamento, Financiamento::calculoTotalPagamento);
 
         interfaceUsuario.mostrarSeparador();
         interfaceUsuario.criarEspaco();
