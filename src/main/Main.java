@@ -4,6 +4,7 @@ import modelo.Apartamento;
 import modelo.Casa;
 import modelo.Financiamento;
 import modelo.Terreno;
+import modelo.TipoZona;
 import util.InterfaceUsuario;
 
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class Main {
 
     }
 
-    public static List<? extends Financiamento> criarFinanciamentos(
+    public static void criarFinanciamentos(
             InterfaceUsuario interfaceUsuario,
             int quantidade,
             String nomeFinanciamento,
@@ -38,36 +39,29 @@ public class Main {
             System.out.println("Financiamento de " + nomeFinanciamento + " " + (i + 1));
 
             try {
-                // Cria instância temporária para coletar dados básicos
-                Financiamento financiamentoTemp = tipoFinanciamento
-                        .getConstructor(double.class, int.class, double.class)
-                        .newInstance(0.0, 1, 0.0);
-
                 // Coleta dados básicos (comuns a todos os financiamentos)
-                double valorImovel = interfaceUsuario.pedirValorImovel(financiamentoTemp);
-                int prazoFinanciamentoEmAnos = interfaceUsuario.pedirPrazoFinanciamento(financiamentoTemp);
-                double taxaJuros = interfaceUsuario.pedirTaxaDeJuros(financiamentoTemp);
+                double valorImovel = interfaceUsuario.pedirValorImovel();
+                int prazoFinanciamentoEmAnos = interfaceUsuario.pedirPrazoFinanciamento();
+                double taxaJuros = interfaceUsuario.pedirTaxaDeJuros();
 
                 // Switch para coletar dados específicos e criar instância final
                 Financiamento financiamento;
                 switch (nomeFinanciamento) {
                     case "Casa":
-                        Casa casaTemp = (Casa) financiamentoTemp;
-                        double tamanhoareaConstrucao = interfaceUsuario.pedirTamanhoareaConstrucao(casaTemp);
-                        double tamanhoTerreno = interfaceUsuario.pedirTamanhoTerreno(casaTemp);
-                        financiamento = new Casa(valorImovel, prazoFinanciamentoEmAnos, taxaJuros, tamanhoareaConstrucao, tamanhoTerreno);
+                        double areaConstruida = interfaceUsuario.pedirAreaConstruida();
+                        double tamanhoTerreno = interfaceUsuario.pedirTamanhoTerreno(areaConstruida);
+                        financiamento = new Casa(valorImovel, prazoFinanciamentoEmAnos, taxaJuros, areaConstruida, tamanhoTerreno);
                         break;
 
                     case "Apartamento":
-                        Apartamento apartamentoTemp = (Apartamento) financiamentoTemp;
-                        int numeroVagasGaragem = interfaceUsuario.pedirNumeroVagasGaragem(apartamentoTemp);
-                        int numeroAndar = interfaceUsuario.pedirNumeroAndar(apartamentoTemp);
+                        int numeroVagasGaragem = interfaceUsuario.pedirNumeroVagasGaragem();
+                        int numeroAndar = interfaceUsuario.pedirNumeroAndar();
                         financiamento = new Apartamento(valorImovel, prazoFinanciamentoEmAnos, taxaJuros, numeroVagasGaragem, numeroAndar);
                         break;
 
                     case "Terreno":
-                        Terreno terrenoTemp = (Terreno) financiamentoTemp;
-                        String tipoZona = interfaceUsuario.pedirTipoZona(terrenoTemp);
+                        String tipoZonaStr = interfaceUsuario.pedirTipoZona();
+                        TipoZona tipoZona = TipoZona.fromString(tipoZonaStr);
                         financiamento = new Terreno(valorImovel, prazoFinanciamentoEmAnos, taxaJuros, tipoZona);
                         break;
 
@@ -83,7 +77,6 @@ public class Main {
         }
 
         mostrarResumoFinanciamentos(financiamentoList, interfaceUsuario, nomeFinanciamento);
-        return financiamentoList;
     }
 
     //função para mostrar total que recebe o campo e o texto com o nome do campo.

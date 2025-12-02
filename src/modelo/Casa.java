@@ -5,10 +5,6 @@ public class Casa  extends Financiamento{
     private double tamanhoareaConstrucao;
     private double tamanhoTerreno;
 
-    public Casa(double valorImovel, int prazoFinanciamento, double taxaJurosAnual) {
-        super(valorImovel, prazoFinanciamento, taxaJurosAnual);
-    }
-
     public Casa(double valorImovel, int prazoFinanciamento, double taxaJurosAnual, double tamanhoareaConstrucao, double tamanhoTerreno) {
         super(valorImovel, prazoFinanciamento, taxaJurosAnual);
         this.tamanhoareaConstrucao = tamanhoareaConstrucao;

@@ -2,13 +2,9 @@ package modelo;
 
 public class Terreno  extends Financiamento{
 
-    private String tipoZona;
+    private TipoZona tipoZona;
 
-    public Terreno(double valorImovel, int prazoFinanciamento, double taxaJurosAnual) {
-        super(valorImovel, prazoFinanciamento, taxaJurosAnual);
-    }
-
-    public Terreno(double valorImovel, int prazoFinanciamento, double taxaJurosAnual, String tipoZona) {
+    public Terreno(double valorImovel, int prazoFinanciamento, double taxaJurosAnual, TipoZona tipoZona) {
         super(valorImovel, prazoFinanciamento, taxaJurosAnual);
         this.tipoZona = tipoZona;
     }
@@ -24,13 +20,13 @@ public class Terreno  extends Financiamento{
         System.out.println("Tipo de Zona: " + tipoZona);
     }
 
-    public String getTipoZona() {
+    public TipoZona getTipoZona() {
         return tipoZona;
     }
 
-    public void setTipoZona(String tipoZona) {
-        if (tipoZona == null || tipoZona.trim().isEmpty()) {
-            throw new IllegalArgumentException("O tipo de zona não pode ser vazio.");
+    public void setTipoZona(TipoZona tipoZona) {
+        if (tipoZona == null) {
+            throw new IllegalArgumentException("O tipo de zona não pode ser nulo.");
         }
         this.tipoZona = tipoZona;
     }
