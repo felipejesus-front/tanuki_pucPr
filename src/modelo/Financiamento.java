@@ -1,6 +1,10 @@
 package modelo;
 
-public abstract class  Financiamento {
+import java.io.Serializable;
+
+public abstract class Financiamento implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
 
     private double valorImovel;

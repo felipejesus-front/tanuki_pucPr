@@ -1,6 +1,8 @@
 package modelo;
 
-public enum TipoZona {
+import java.io.Serializable;
+
+public enum TipoZona implements Serializable {
     RESIDENCIAL("Residencial"),
     COMERCIAL("Comercial");
 

@@ -1,6 +1,10 @@
 package modelo;
 
-public class Terreno  extends Financiamento{
+import java.io.Serializable;
+
+public class Terreno extends Financiamento implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private TipoZona tipoZona;
 

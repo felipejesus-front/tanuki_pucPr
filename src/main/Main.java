@@ -7,6 +7,7 @@ import modelo.Financiamento;
 import modelo.Terreno;
 import modelo.TipoZona;
 import util.InterfaceUsuario;
+import util.GerenciadorArquivos;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,14 +20,45 @@ public class Main {
 
         InterfaceUsuario interfaceUsuario = new InterfaceUsuario();
 
-        //crio as listas de financiamentos de qualquer um dos tipos de financiamentos
-        criarFinanciamentos(interfaceUsuario, 2, "Casa", Casa.class);
-        criarFinanciamentos(interfaceUsuario, 2, "Apartamento", Apartamento.class);
-        criarFinanciamentos(interfaceUsuario, 2, "Terreno", Terreno.class);
+        // Lista principal que vai armazenar todos os financiamentos
+        List<Financiamento> todosFinanciamentos = new ArrayList<>();
 
+        // Cria as listas de financiamentos de qualquer um dos tipos de financiamentos
+        todosFinanciamentos.addAll(criarFinanciamentos(interfaceUsuario, 2, "Casa", Casa.class));
+        todosFinanciamentos.addAll(criarFinanciamentos(interfaceUsuario, 2, "Apartamento", Apartamento.class));
+        todosFinanciamentos.addAll(criarFinanciamentos(interfaceUsuario, 2, "Terreno", Terreno.class));
+
+        // === OPERAÇÕES DE ARQUIVO ===
+        System.out.println("\n\n======================================");
+        System.out.println("    OPERAÇÕES DE SALVAMENTO           ");
+        System.out.println("======================================");
+
+        // 1. Salvar em arquivo de texto
+        GerenciadorArquivos.salvarEmTexto(todosFinanciamentos);
+
+        // 2. Ler arquivo de texto para comprovar
+        GerenciadorArquivos.lerDeTexto();
+
+        // 3. Salvar em arquivo serializado
+        GerenciadorArquivos.salvarSerializado(todosFinanciamentos);
+
+        // 4. Ler arquivo serializado para comprovar
+        List<Financiamento> financiamentosRecuperados = GerenciadorArquivos.lerSerializado();
+
+        System.out.println("\n======================================");
+        System.out.println("  VERIFICAÇÃO DE INTEGRIDADE DOS DADOS");
+        System.out.println("======================================");
+        System.out.println("Total de financiamentos originais: " + todosFinanciamentos.size());
+        System.out.println("Total de financiamentos recuperados: " + financiamentosRecuperados.size());
+
+        if (todosFinanciamentos.size() == financiamentosRecuperados.size()) {
+            System.out.println("✓ Integridade verificada: Todos os dados foram salvos e recuperados corretamente!");
+        } else {
+            System.out.println("✗ Erro: Divergência no número de financiamentos!");
+        }
     }
 
-    public static void criarFinanciamentos(
+    public static List<Financiamento> criarFinanciamentos(
             InterfaceUsuario interfaceUsuario,
             int quantidade,
             String nomeFinanciamento,
@@ -83,6 +115,8 @@ public class Main {
         }
 
         mostrarResumoFinanciamentos(financiamentoList, interfaceUsuario, nomeFinanciamento);
+
+        return financiamentoList;
     }
 
     //função para mostrar total que recebe o campo e o texto com o nome do campo.
