@@ -18,16 +18,16 @@ public class Main {
         InterfaceUsuario interfaceUsuario = new InterfaceUsuario();
 
         //crio as listas de financiamentos de qualquer um dos tipos de financiamentos
-        List<? extends Financiamento> financiamentoCasa = criarFinanciamentos(interfaceUsuario, 2, "Casa", Casa.class);
+        criarFinanciamentos(interfaceUsuario, 2, "Casa", Casa.class);
 
-        List<? extends Financiamento> financiamentoApartamento = criarFinanciamentos(interfaceUsuario, 2,"Apartamento", Apartamento.class);
+        criarFinanciamentos(interfaceUsuario, 2,"Apartamento", Apartamento.class);
 
-        List<? extends Financiamento> financiamentoTerreno = criarFinanciamentos(interfaceUsuario, 2, "Terreno", Terreno.class);
+        criarFinanciamentos(interfaceUsuario, 2, "Terreno", Terreno.class);
 
     }
 
-    //Fiz uma mudança nesse metodo pra receber também classes que extendem financiamento. Não sabia q dava pra fazer isso, obrigado pelo incentivo!
-    public static List<? extends Financiamento> criarFinanciamentos(InterfaceUsuario interfaceUsuario, int quantidade, String nomeFinanciamento, Class<? extends Financiamento> tipoFinanciamento) {
+    //Fiz uma mudança nesse método para receber também classes que extendem financiamento. Não sabia que dava para fazer isso, obrigado pelo incentivo!
+    public static void criarFinanciamentos(InterfaceUsuario interfaceUsuario, int quantidade, String nomeFinanciamento, Class<? extends Financiamento> tipoFinanciamento) {
         List<Financiamento> financiamentoList = new ArrayList<>();
         for (int i = 0; i < quantidade; i++) {
             System.out.println("Financiamento  de "+ nomeFinanciamento + " " + (i + 1));
@@ -50,7 +50,6 @@ public class Main {
         }
 
         mostrarResumoFinanciamentos(financiamentoList, interfaceUsuario, nomeFinanciamento);
-        return financiamentoList;
     }
 
     //função para mostrar total que recebe o campo e o texto com o nome do campo.
@@ -59,7 +58,7 @@ public class Main {
         System.out.println("Valor total de " + nomeCampo + ": R$ " + String.format("%,.2f", total));
     }
 
-    //Se der certo, esse metodo vai mostrar qualquer tipo de financiamento q eu quizer, seja casa, Apartamento ou Terreno, desde que extenda Financiamento.
+    //Se der certo, esse método vai mostrar qualquer tipo de financiamento q eu quiser, seja casa, Apartamento ou Terreno, desde que extenda Financiamento.
     public static void mostrarResumoFinanciamentos(
             List<? extends Financiamento> lista,
             InterfaceUsuario interfaceUsuario,
